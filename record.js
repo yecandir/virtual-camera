@@ -3,7 +3,7 @@ const recBtn = document.getElementById("rec");
 const stopBtn = document.getElementById("stop");
 const msg = document.getElementById("msg");
 
-let stream, recorder, chunks = [], startedAt;
+let stream, recorder, chunks = [], startedAt, ext = "webm";
 
 navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 } })
   .then((s) => { stream = s; v.srcObject = s; })
@@ -17,7 +17,8 @@ navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 } })
 
 recBtn.onclick = () => {
   chunks = [];
-  const mime = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"].find((m) => MediaRecorder.isTypeSupported(m));
+  const mime = ["video/mp4;codecs=avc1", "video/mp4", "video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"].find((m) => MediaRecorder.isTypeSupported(m));
+  ext = mime.startsWith("video/mp4") ? "mp4" : "webm";
   recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 2_500_000 });
   recorder.ondataavailable = (e) => e.data.size && chunks.push(e.data);
   recorder.onstop = save;
@@ -42,8 +43,8 @@ stopBtn.onclick = () => { stopBtn.disabled = true; recorder.stop(); };
 
 function save() {
   stream.getTracks().forEach((t) => t.stop());
-  const blob = new Blob(chunks, { type: "video/webm" });
-  const name = "kayit-" + new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-") + ".webm";
+  const blob = new Blob(chunks, { type: "video/" + ext });
+  const name = "kayit-" + new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-") + "." + ext;
   msg.textContent = "Kaydediliyor...";
   const rd = new FileReader();
   rd.onload = async () => {
