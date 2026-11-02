@@ -1,0 +1,16 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  body { font: 14px system-ui; width: 260px; padding: 12px; }
+  label { display: block; margin: 8px 0; }
+  #file { margin-left: 22px; max-width: 220px; }
+  #info { color: #666; font-size: 12px; margin-top: 8px; }
+</style>
+<b>Sanal Kamera</b>
+<label><input type="radio" name="mode" value="camera"> MacBook kamerası</label>
+<label><input type="radio" name="mode" value="video"> Video oynat</label>
+<input type="file" id="file" accept="video/*">
+<button id="record" style="margin-top:8px">⏺ Kamera kaydı al</button>
+<div id="info"></div>
+<div id="info2" style="color:#666;font-size:12px;margin-top:6px">Değişiklik açık görüşmede anında uygulanır.</div>
+<script src="popup.js"></script>

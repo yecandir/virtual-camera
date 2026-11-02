@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Kamera Kaydı</title>
+<style>
+  body { font: 14px system-ui; margin: 0; padding: 12px; background: #111; color: #eee; }
+  video { width: 100%; background: #000; border-radius: 8px; }
+  button { font: inherit; padding: 8px 14px; margin: 10px 6px 0 0; border-radius: 6px; border: 0; cursor: pointer; }
+  #rec { background: #e33; color: #fff; }
+  #stop { background: #eee; }
+  #msg { margin-top: 10px; color: #aaa; }
+  a { color: #8cf; }
+</style>
+<video id="v" autoplay muted playsinline></video>
+<div>
+  <button id="rec">⏺ Kaydı başlat</button>
+  <button id="stop" disabled>⏹ Durdur ve kaydet</button>
+</div>
+<div id="msg">Kayıt, mevcut kayıtlı videonun yerine geçer.</div>
+<script src="record.js"></script>
