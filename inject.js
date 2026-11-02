@@ -9,7 +9,7 @@
   let cfgSeen = false;
   let waiters = [];
 
-  let fileVid = null, fileUrl = null;
+  let fileVid = null, fileUrl = null, fileErr = null;
   let camVid = null, camStream = null, camPending = false;
   const sessions = new Set();
   let ticking = false;
@@ -28,8 +28,13 @@
       fileUrl = URL.createObjectURL(cfg.blob);
       fileVid = mkVideo();
       fileVid.loop = true;
+      fileVid.onerror = () => {
+        console.warn("[sanal-kamera] video oynatılamadı", fileVid.error);
+        fileErr = "Video oynatılamadı (codec desteklenmiyor olabilir)";
+      };
+      fileErr = null;
       fileVid.src = fileUrl;
-      fileVid.play().catch(() => {});
+      fileVid.play().catch((e) => console.warn("[sanal-kamera] play hatası", e));
     }
   }
 
@@ -77,6 +82,13 @@
       if (sr > cr) { sw = sh * cr; sx = (src.videoWidth - sw) / 2; }
       else { sh = sw / cr; sy = (src.videoHeight - sh) / 2; }
       g.drawImage(src, sx, sy, sw, sh, 0, 0, c.width, c.height);
+    } else if (cfg.mode === "video" && fileErr) {
+      g.fillStyle = "#400";
+      g.fillRect(0, 0, c.width, c.height);
+      g.fillStyle = "#fff";
+      g.font = `${c.height / 18}px sans-serif`;
+      g.textAlign = "center";
+      g.fillText(fileErr, c.width / 2, c.height / 2);
     } else if (cfg.mode === "video" && !cfg.blob) {
       const t = Date.now() / 1000;
       g.fillStyle = `hsl(${(t * 30) % 360},60%,35%)`;
