@@ -10,6 +10,17 @@ document.querySelectorAll("input[name=mode]").forEach((r) =>
   r.addEventListener("change", () => chrome.storage.local.set({ mode: r.value }))
 );
 
+document.getElementById("download").addEventListener("click", async () => {
+  const { video, videoName } = await chrome.storage.local.get(["video", "videoName"]);
+  if (!video) { info.textContent = "Kayıtlı video yok."; return; }
+  const blob = await (await fetch(video)).blob();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = videoName || "kayit.webm";
+  a.click();
+  info.textContent = "İndirilenler klasörüne indirildi: " + a.download;
+});
+
 document.getElementById("record").addEventListener("click", () => {
   // popup odak kaybedince kapanır; kayıt ayrı bir pencerede yapılır
   chrome.tabs.create({ url: "record.html" });

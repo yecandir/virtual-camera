@@ -2,18 +2,22 @@
 <meta charset="utf-8">
 <title>Kamera Kaydı</title>
 <style>
-  body { font: 14px system-ui; margin: 0; padding: 12px; background: #111; color: #eee; }
-  video { width: 100%; background: #000; border-radius: 8px; }
-  button { font: inherit; padding: 8px 14px; margin: 10px 6px 0 0; border-radius: 6px; border: 0; cursor: pointer; }
+  body { font: 15px system-ui; margin: 0; padding: 16px; background: #111; color: #eee; max-width: 720px; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; position: sticky; top: 0; background: #111; padding-bottom: 12px; }
+  button { font: inherit; font-weight: 600; padding: 14px 20px; border-radius: 8px; border: 0; cursor: pointer; }
+  button:disabled { opacity: .4; cursor: default; }
   #rec { background: #e33; color: #fff; }
-  #stop { background: #eee; }
-  #msg { margin-top: 10px; color: #aaa; }
+  #stop { background: #3a3; color: #fff; }
+  #close { background: #eee; color: #111; }
+  video { width: 100%; max-height: 55vh; background: #000; border-radius: 8px; }
+  #msg { margin: 10px 0; color: #ccc; }
   a { color: #8cf; }
 </style>
-<video id="v" autoplay muted playsinline></video>
-<div>
-  <button id="rec">⏺ Kaydı başlat</button>
-  <button id="stop" disabled>⏹ Durdur ve kaydet</button>
+<div class="btns">
+  <button id="rec">1) ⏺ Kaydı başlat</button>
+  <button id="stop" disabled>2) ⏹ Durdur ve kaydet</button>
+  <button id="close">3) ✕ Kapat</button>
 </div>
 <div id="msg">Kayıt, mevcut kayıtlı videonun yerine geçer.</div>
+<video id="v" autoplay muted playsinline></video>
 <script src="record.js"></script>

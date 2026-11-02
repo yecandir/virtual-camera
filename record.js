@@ -31,6 +31,13 @@ recBtn.onclick = () => {
   }, 500);
 };
 
+document.getElementById("close").onclick = async () => {
+  if (recorder && recorder.state === "recording") recorder.onstop = null;
+  if (stream) stream.getTracks().forEach((t) => t.stop());
+  const tab = await chrome.tabs.getCurrent();
+  if (tab) chrome.tabs.remove(tab.id); else window.close();
+};
+
 stopBtn.onclick = () => { stopBtn.disabled = true; recorder.stop(); };
 
 function save() {
