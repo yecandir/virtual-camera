@@ -5,7 +5,7 @@
 
   const md = navigator.mediaDevices;
   const orig = md.getUserMedia.bind(md);
-  let cfg = { mode: "camera", blob: null };
+  let cfg = { mode: "camera", blob: null, s: { mirror: false, brightness: 1, blur: 0 } };
   let cfgSeen = false;
   let waiters = [];
 
@@ -60,9 +60,10 @@
 
   window.addEventListener("message", (e) => {
     if (e.source === window && e.data && e.data.__vcam) {
-      cfg = { mode: e.data.mode, blob: e.data.blob };
+      cfg.mode = e.data.mode;
+      if (e.data.settings) cfg.s = { mirror: false, brightness: 1, blur: 0, ...e.data.settings };
+      if (e.data.reload) { cfg.blob = e.data.blob; setFile(); }
       cfgSeen = true;
-      setFile();
       applyCfg();
       waiters.forEach((w) => w());
       waiters = [];
@@ -81,7 +82,14 @@
       let sw = src.videoWidth, sh = src.videoHeight, sx = 0, sy = 0;
       if (sr > cr) { sw = sh * cr; sx = (src.videoWidth - sw) / 2; }
       else { sh = sw / cr; sy = (src.videoHeight - sh) / 2; }
+      g.save();
+      const f = [];
+      if (cfg.s.brightness !== 1) f.push(`brightness(${cfg.s.brightness})`);
+      if (cfg.s.blur > 0) f.push(`blur(${cfg.s.blur}px)`);
+      g.filter = f.length ? f.join(" ") : "none";
+      if (cfg.s.mirror) { g.translate(c.width, 0); g.scale(-1, 1); }
       g.drawImage(src, sx, sy, sw, sh, 0, 0, c.width, c.height);
+      g.restore();
     } else if (cfg.mode === "video" && fileErr) {
       g.fillStyle = "#400";
       g.fillRect(0, 0, c.width, c.height);

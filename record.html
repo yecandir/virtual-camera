@@ -1,23 +1,46 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Kamera Kaydı</title>
-<style>
-  body { font: 15px system-ui; margin: 0; padding: 16px; background: #111; color: #eee; max-width: 720px; }
-  .btns { display: flex; gap: 10px; flex-wrap: wrap; position: sticky; top: 0; background: #111; padding-bottom: 12px; }
-  button { font: inherit; font-weight: 600; padding: 14px 20px; border-radius: 8px; border: 0; cursor: pointer; }
-  button:disabled { opacity: .4; cursor: default; }
-  #rec { background: #e33; color: #fff; }
-  #stop { background: #3a3; color: #fff; }
-  #close { background: #eee; color: #111; }
-  video { width: 100%; max-height: 55vh; background: #000; border-radius: 8px; }
-  #msg { margin: 10px 0; color: #ccc; }
-  a { color: #8cf; }
-</style>
-<div class="btns">
-  <button id="rec">1) ⏺ Kaydı başlat</button>
-  <button id="stop" disabled>2) ⏹ Durdur ve kaydet</button>
-  <button id="close">3) ✕ Kapat</button>
-</div>
-<div id="msg">Kayıt, mevcut kayıtlı videonun yerine geçer.</div>
-<video id="v" autoplay muted playsinline></video>
+<title>Kayıt</title>
+<link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="record.css">
+<main>
+  <header>
+    <img src="icons/icon48.png" width="32" height="32" alt="">
+    <h1>Kayıt</h1>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button data-src="camera" class="on">📷 Kamera</button>
+    <button data-src="screen">🖥 Ekran + ses</button>
+    <button data-src="audio">🎙 Sadece ses</button>
+  </div>
+
+  <div class="stage">
+    <video id="v" autoplay muted playsinline></video>
+    <div id="placeholder" class="placeholder" hidden></div>
+    <div id="count" class="overlay" hidden></div>
+    <div id="timer" class="pill" hidden><i></i><span id="time">00:00</span></div>
+  </div>
+
+  <div id="msg" class="msg"></div>
+  <div id="hint" class="hint" hidden></div>
+
+  <div id="controls">
+    <input id="name" type="text" placeholder="Kayıt adı (boş bırakırsan tarih/saat)" maxlength="60">
+    <div class="btns">
+      <button id="rec" class="btn primary big">⏺ Kaydı başlat</button>
+      <button id="stop" class="btn big" hidden>⏹ Durdur ve kaydet</button>
+      <button id="close" class="btn ghost big">✕ Kapat</button>
+    </div>
+  </div>
+
+  <div id="done" hidden>
+    <div class="btns">
+      <button id="dl" class="btn big">⬇ İndir</button>
+      <button id="again" class="btn big">⏺ Yeni kayıt</button>
+      <button id="close2" class="btn primary big">✓ Kapat</button>
+    </div>
+  </div>
+</main>
+<script src="lib.js"></script>
 <script src="record.js"></script>

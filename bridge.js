@@ -1,14 +1,27 @@
 // Isolated world: storage -> sayfa (MAIN world) köprüsü
-async function push() {
-  const { mode = "camera", video } = await chrome.storage.local.get(["mode", "video"]);
-  let blob = null;
-  if (mode === "video" && video) {
-    try { blob = await (await fetch(video)).blob(); } catch (e) {}
+let lastKey = null;
+
+async function push(force) {
+  const d = await chrome.storage.local.get(["mode", "activeId", "settings"]);
+  const mode = d.mode || "camera";
+  const key = mode === "video" ? d.activeId || "none" : "";
+  const msg = { __vcam: true, mode, settings: d.settings };
+  // video blob'u yalnızca kaynak değiştiğinde gönder (efekt değişince video başa sarmasın)
+  if (force || key !== lastKey) {
+    lastKey = key;
+    msg.reload = true;
+    msg.blob = null;
+    if (key && key !== "none") {
+      const o = await chrome.storage.local.get("vid:" + key);
+      const url = o["vid:" + key];
+      if (url) try { msg.blob = await (await fetch(url)).blob(); } catch (e) {}
+    }
   }
-  window.postMessage({ __vcam: true, mode, blob }, "*");
+  window.postMessage(msg, "*");
 }
+
 window.addEventListener("message", (e) => {
-  if (e.source === window && e.data && e.data.__vcamReady) push();
+  if (e.source === window && e.data && e.data.__vcamReady) push(true);
 });
-chrome.storage.onChanged.addListener(push);
-push();
+chrome.storage.onChanged.addListener(() => push(false));
+push(true);

@@ -1,41 +1,96 @@
-const info = document.getElementById("info");
-const file = document.getElementById("file");
+const $ = (id) => document.getElementById(id);
+const DEFAULTS = { mirror: false, brightness: 1, blur: 0 };
+let state = { mode: "camera", activeId: null, library: [], settings: { ...DEFAULTS } };
 
-chrome.storage.local.get(["mode", "video", "videoName"]).then(({ mode = "camera", video, videoName }) => {
-  document.querySelector(`input[value=${mode}]`).checked = true;
-  if (video) info.textContent = "Kayıtlı video: " + (videoName || "var");
-});
+async function load() {
+  await Lib.migrate();
+  const d = await chrome.storage.local.get(["mode", "activeId", "library", "settings"]);
+  state = {
+    mode: d.mode || "camera",
+    activeId: d.activeId || null,
+    library: d.library || [],
+    settings: { ...DEFAULTS, ...(d.settings || {}) },
+  };
+  render();
+}
 
-document.querySelectorAll("input[name=mode]").forEach((r) =>
-  r.addEventListener("change", () => chrome.storage.local.set({ mode: r.value }))
+function render() {
+  // mod
+  document.querySelectorAll("#seg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
+  $("status").classList.toggle("video", state.mode === "video");
+  $("statusText").textContent = state.mode === "video" ? "Video oynuyor" : "Kamera";
+
+  // liste
+  const ul = $("list");
+  ul.textContent = "";
+  $("empty").hidden = state.library.length > 0;
+  for (const v of state.library) {
+    const li = document.createElement("li");
+    li.className = v.id === state.activeId ? "active" : "";
+    li.innerHTML = `<span class="dot"></span><div class="info"><div class="name"></div><div class="meta"></div></div>
+      <button class="dl" title="İndir">⬇</button><button class="del" title="Sil">✕</button>`;
+    li.querySelector(".name").textContent = v.name;
+    li.querySelector(".meta").textContent = Lib.size(v.size) + " · " + new Date(v.created).toLocaleDateString("tr-TR");
+    li.onclick = () => chrome.storage.local.set({ activeId: v.id, mode: "video" }).then(load);
+    li.querySelector(".dl").onclick = (e) => { e.stopPropagation(); Lib.download(v); };
+    li.querySelector(".del").onclick = async (e) => {
+      e.stopPropagation();
+      if (!confirm(`"${v.name}" silinsin mi?`)) return;
+      await Lib.remove(v.id);
+      load();
+    };
+    ul.append(li);
+  }
+
+  // efektler
+  const s = state.settings;
+  $("mirror").checked = s.mirror;
+  $("brightness").value = s.brightness;
+  $("brightnessOut").textContent = Math.round(s.brightness * 100) + "%";
+  $("blur").value = s.blur;
+  $("blurOut").textContent = s.blur + " px";
+}
+
+// mod seçimi
+document.querySelectorAll("#seg button").forEach((b) =>
+  b.addEventListener("click", () => {
+    state.mode = b.dataset.mode;
+    chrome.storage.local.set({ mode: state.mode });
+    render();
+  })
 );
 
-document.getElementById("download").addEventListener("click", async () => {
-  const { video, videoName } = await chrome.storage.local.get(["video", "videoName"]);
-  if (!video) { info.textContent = "Kayıtlı video yok."; return; }
-  const blob = await (await fetch(video)).blob();
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = videoName || "kayit.webm";
-  a.click();
-  info.textContent = "İndirilenler klasörüne indirildi: " + a.download;
-});
+// efektler
+function saveSettings() {
+  chrome.storage.local.set({ settings: state.settings });
+  render();
+}
+$("mirror").onchange = (e) => { state.settings.mirror = e.target.checked; saveSettings(); };
+$("brightness").oninput = (e) => { state.settings.brightness = +e.target.value; saveSettings(); };
+$("blur").oninput = (e) => { state.settings.blur = +e.target.value; saveSettings(); };
+$("reset").onclick = () => { state.settings = { ...DEFAULTS }; saveSettings(); };
 
-document.getElementById("record").addEventListener("click", () => {
-  // popup odak kaybedince kapanır; kayıt ayrı bir pencerede yapılır
+// video ekle
+$("file").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  $("empty").hidden = false;
+  $("empty").textContent = "Yükleniyor...";
+  await Lib.add(f, f.name);
+  e.target.value = "";
+  $("empty").textContent = "Henüz video yok. Bir dosya ekle ya da kamera kaydı al.";
+  load();
+};
+
+// kayıt: popup odak kaybedince kapanır, kayıt ayrı sekmede yapılır
+$("record").onclick = () => {
   chrome.tabs.create({ url: "record.html" });
   window.close();
-});
+};
 
-file.addEventListener("change", () => {
-  const f = file.files[0];
-  if (!f) return;
-  info.textContent = "Yükleniyor...";
-  const rd = new FileReader();
-  rd.onload = async () => {
-    await chrome.storage.local.set({ video: rd.result, videoName: f.name, mode: "video" });
-    document.querySelector("input[value=video]").checked = true;
-    info.textContent = "Kayıtlı video: " + f.name;
-  };
-  rd.readAsDataURL(f);
-});
+$("shortcuts").onclick = (e) => {
+  e.preventDefault();
+  chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+};
+
+load();

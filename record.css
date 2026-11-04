@@ -1,0 +1,22 @@
+main { max-width: 640px; margin: 0 auto; padding: 24px 16px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+h1 { font-size: 20px; }
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; background: var(--card); border-radius: 11px; margin-bottom: 14px; }
+.tabs button { background: transparent; padding: 10px 6px; }
+.tabs button.on { background: var(--bg); box-shadow: 0 1px 4px rgba(0,0,0,.18); color: var(--accent); }
+.tabs button:disabled { opacity: .5; }
+.placeholder { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px; color: #ddd; font-size: 15px; background: #111; }
+.hint { background: var(--accent-soft); color: var(--text); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; font-size: 13px; }
+.stage { position: relative; background: #000; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; }
+.stage video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.overlay { position: absolute; inset: 0; display: grid; place-items: center; font-size: 120px; font-weight: 700; color: #fff; background: rgba(0,0,0,.45); }
+.pill { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,.6); color: #fff; padding: 5px 12px; border-radius: 99px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.pill i { width: 10px; height: 10px; border-radius: 50%; background: #ff3b30; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.msg { margin: 12px 0; color: var(--muted); min-height: 20px; }
+.msg.ok { color: var(--ok); font-weight: 600; }
+.msg.err { color: var(--danger); }
+#name { width: 100%; padding: 11px 12px; font: inherit; border: 1.5px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); margin-bottom: 12px; }
+#name:focus { outline: none; border-color: var(--accent); }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.big { padding: 13px 20px; font-size: 14px; }
