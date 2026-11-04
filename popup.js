@@ -83,10 +83,12 @@ $("file").onchange = async (e) => {
 };
 
 // kayıt: popup odak kaybedince kapanır, kayıt ayrı sekmede yapılır
-$("record").onclick = () => {
-  chrome.tabs.create({ url: "record.html" });
-  window.close();
-};
+document.querySelectorAll("[data-rec]").forEach((b) =>
+  b.addEventListener("click", () => {
+    chrome.tabs.create({ url: "record.html?src=" + b.dataset.rec });
+    window.close();
+  })
+);
 
 $("shortcuts").onclick = (e) => {
   e.preventDefault();

@@ -19,8 +19,12 @@
     <div class="actions">
       <label class="btn small" for="file">＋ Ekle</label>
       <input type="file" id="file" accept="video/*" hidden>
-      <button id="record" class="btn small rec">⏺ Kayıt al</button>
     </div>
+  </div>
+  <div class="recrow">
+    <button class="btn small rec" data-rec="camera">⏺ Kamera</button>
+    <button class="btn small rec" data-rec="screen">🖥 Ekran + ses</button>
+    <button class="btn small rec" data-rec="audio">🎙 Ses</button>
   </div>
   <ul id="list"></ul>
   <p id="empty" class="muted" hidden>Henüz video yok. Bir dosya ekle ya da kamera kaydı al.</p>

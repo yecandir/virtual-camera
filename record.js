@@ -196,4 +196,5 @@ $("close2").onclick = closeTab;
 $("again").onclick = () => location.reload();
 $("dl").onclick = () => savedBlob && downloadBlob(savedBlob, savedName);
 
-setSource("camera");
+const initial = new URLSearchParams(location.search).get("src");
+setSource(["camera", "screen", "audio"].includes(initial) ? initial : "camera");
