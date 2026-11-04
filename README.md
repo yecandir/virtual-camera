@@ -37,3 +37,7 @@ For debugging, run `localStorage.vcamDebug = "1"` in the page console and reload
 ## Contributing
 
 PRs are welcome :D Bug reports and ideas are welcome too. Just open an issue.
+
+## License
+
+[MIT](LICENSE)
