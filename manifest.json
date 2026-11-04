@@ -1,24 +1,63 @@
 {
   "manifest_version": 3,
   "name": "Sanal Kamera",
-  "version": "2.0",
+  "version": "2.1",
   "description": "Kamera yerine video oynat veya gerçek kamerayı kullan. Video kütüphanesi, kayıt ve efektler.",
-  "permissions": ["storage", "unlimitedStorage"],
-  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_title": "Sanal Kamera",
-    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
   },
-  "background": { "service_worker": "background.js" },
+  "background": {
+    "service_worker": "background.js"
+  },
   "commands": {
     "toggle-mode": {
-      "suggested_key": { "default": "Alt+Shift+V", "mac": "Alt+Shift+V" },
+      "suggested_key": {
+        "default": "Alt+Shift+V",
+        "mac": "Alt+Shift+V"
+      },
       "description": "Kamera / Video arasında geçiş yap"
     }
   },
   "content_scripts": [
-    { "matches": ["<all_urls>"], "js": ["inject.js"], "run_at": "document_start", "all_frames": true, "world": "MAIN" },
-    { "matches": ["<all_urls>"], "js": ["bridge.js"], "run_at": "document_start", "all_frames": true }
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN",
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "bridge.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    }
   ]
 }
