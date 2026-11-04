@@ -1,3 +1,5 @@
+/* display: grid/flex kuralları [hidden]'ı ezmesin */
+[hidden] { display: none !important; }
 main { max-width: 640px; margin: 0 auto; padding: 24px 16px; }
 header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 h1 { font-size: 20px; }

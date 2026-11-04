@@ -143,6 +143,10 @@
       if (cfg.s.mirror) { g.translate(c.width, 0); g.scale(-1, 1); }
       g.drawImage(src, sx, sy, sw, sh, 0, 0, c.width, c.height);
       g.restore();
+      s.lastSrc = src;
+    } else if (src && s.lastSrc === src && !(cfg.mode === "video" && fileErr)) {
+      // loop başa sararken / seek sırasında kare kısa süre hazır olmaz: son kareyi tut
+      return;
     } else if (cfg.mode === "video" && fileErr) {
       g.fillStyle = "#400";
       g.fillRect(0, 0, c.width, c.height);

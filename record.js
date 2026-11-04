@@ -175,8 +175,9 @@ async function save() {
   $("done").hidden = false;
 
   if (src === "camera") {
-    await Lib.add(blob, savedName);
-    say(`✓ "${savedName}" kaydedildi ve kamera olarak seçildi.`, "ok");
+    // otomatik seçme: kullanıcı popup'taki listeden kendisi seçsin
+    await Lib.add(blob, savedName, { activate: false });
+    say(`✓ "${savedName}" kütüphaneye kaydedildi. Kullanmak için eklenti menüsünden seç.`, "ok");
   } else {
     downloadBlob(blob, savedName);
     say(`✓ "${savedName}" İndirilenler klasörüne indirildi (${Lib.size(blob.size)}).`, "ok");
