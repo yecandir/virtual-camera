@@ -45,13 +45,13 @@ Açık kaynak: https://github.com/yecandir/virtual-camera
 
 ### Graphics (required)
 
-| Asset | Size | Status |
+| Asset | Size | File |
 |---|---|---|
-| Store icon | 128×128 PNG | `icons/icon128.png` ✓ |
-| Screenshots (1–5) | 1280×800 or 640×400 | needed |
-| Small promo tile | 440×280 PNG | needed |
+| Store icon | 128×128 PNG (96px art + 16px padding) | `store/store-icon-128.png` |
+| Screenshots | 1280×800 | `store/screenshot-1-en.png`, `store/screenshot-2-en.png` |
+| Screenshots (Turkish listing) | 1280×800 | `store/screenshot-1-tr.png`, `store/screenshot-2-tr.png` |
+| Small promo tile | 440×280 PNG | `store/promo-440x280.png` |
 
-Screenshot ideas: popup with the source list; Teams pre-join screen showing a video as the camera; the recording page.
 
 ## Privacy tab
 
