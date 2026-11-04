@@ -8,26 +8,22 @@
   <span id="status" class="status"><i></i><span id="statusText">Kamera</span></span>
 </header>
 
-<div class="seg" id="seg">
-  <button data-mode="camera">📷 Kamera</button>
-  <button data-mode="video">🎞 Video</button>
-</div>
+<section>
+  <div class="row"><h2>Toplantı kaydı</h2></div>
+  <div class="recrow">
+    <button class="btn rec" data-rec="screen">🖥 Ekran + ses</button>
+    <button class="btn rec" data-rec="audio">🎙 Sadece ses</button>
+  </div>
+</section>
 
 <section>
-  <div class="row">
-    <h2>Videolar</h2>
-    <div class="actions">
-      <label class="btn small" for="file">＋ Ekle</label>
-      <input type="file" id="file" accept="video/*" hidden>
-    </div>
-  </div>
-  <div class="recrow">
-    <button class="btn small rec" data-rec="camera">⏺ Kamera</button>
-    <button class="btn small rec" data-rec="screen">🖥 Ekran + ses</button>
-    <button class="btn small rec" data-rec="audio">🎙 Ses</button>
-  </div>
+  <div class="row"><h2>Kaynak</h2></div>
   <ul id="list"></ul>
-  <p id="empty" class="muted" hidden>Henüz video yok. Bir dosya ekle ya da kamera kaydı al.</p>
+  <div class="recrow addrow">
+    <button class="btn rec" data-rec="camera">⏺ Kamera</button>
+    <label class="btn" for="file" id="addLabel">＋ Ekle</label>
+    <input type="file" id="file" accept="video/*" hidden>
+  </div>
 </section>
 
 <section>

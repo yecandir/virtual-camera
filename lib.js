@@ -31,7 +31,7 @@ const Lib = {
     const library = (await Lib.list()).filter((v) => v.id !== id);
     await chrome.storage.local.remove("vid:" + id);
     const data = { library };
-    if (activeId === id) data.activeId = library[0] ? library[0].id : null;
+    if (activeId === id) { data.activeId = null; data.mode = "camera"; }
     await chrome.storage.local.set(data);
   },
 
@@ -63,7 +63,6 @@ const Lib = {
     await chrome.storage.local.remove(["video", "videoName"]);
     await Lib.add(blob, videoName || "Eski video", { activate: false });
     const { activeId } = await chrome.storage.local.get("activeId");
-    if (!activeId) await chrome.storage.local.set({ activeId: (await Lib.list())[0].id });
   },
 
   size(n) {

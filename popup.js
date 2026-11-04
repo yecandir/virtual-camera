@@ -14,24 +14,37 @@ async function load() {
   render();
 }
 
-function render() {
-  // mod
-  document.querySelectorAll("#seg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
-  $("status").classList.toggle("video", state.mode === "video");
-  $("statusText").textContent = state.mode === "video" ? "Video oynuyor" : "Kamera";
+// seçili video yoksa (ya da silindiyse) her zaman kamera
+const playing = () => state.mode === "video" && state.library.some((v) => v.id === state.activeId);
 
-  // liste
+function render() {
+  const onVideo = playing();
+  $("status").classList.toggle("video", onVideo);
+  $("statusText").textContent = onVideo ? "Video oynuyor" : "Kamera";
+
   const ul = $("list");
   ul.textContent = "";
-  $("empty").hidden = state.library.length > 0;
+
+  // varsayılan kaynak: kamera
+  const cam = document.createElement("li");
+  cam.className = "cam" + (onVideo ? "" : " active");
+  cam.innerHTML = `<span class="dot"></span><span class="ico">📷</span><div class="info"><div class="name">MacBook kamerası</div><div class="meta">Varsayılan · gerçek kamera</div></div>`;
+  cam.onclick = () => chrome.storage.local.set({ mode: "camera", activeId: null }).then(load);
+  ul.append(cam);
+
   for (const v of state.library) {
     const li = document.createElement("li");
-    li.className = v.id === state.activeId ? "active" : "";
-    li.innerHTML = `<span class="dot"></span><div class="info"><div class="name"></div><div class="meta"></div></div>
+    const selected = onVideo && v.id === state.activeId;
+    li.className = selected ? "active" : "";
+    li.innerHTML = `<span class="dot"></span><span class="ico">🎞</span><div class="info"><div class="name"></div><div class="meta"></div></div>
       <button class="dl" title="İndir">⬇</button><button class="del" title="Sil">✕</button>`;
     li.querySelector(".name").textContent = v.name;
     li.querySelector(".meta").textContent = Lib.size(v.size) + " · " + new Date(v.created).toLocaleDateString("tr-TR");
-    li.onclick = () => chrome.storage.local.set({ activeId: v.id, mode: "video" }).then(load);
+    // seçili videoya tekrar tıklayınca seçim kalkar -> kamera
+    li.onclick = () =>
+      chrome.storage.local
+        .set(selected ? { mode: "camera", activeId: null } : { activeId: v.id, mode: "video" })
+        .then(load);
     li.querySelector(".dl").onclick = (e) => { e.stopPropagation(); Lib.download(v); };
     li.querySelector(".del").onclick = async (e) => {
       e.stopPropagation();
@@ -51,15 +64,6 @@ function render() {
   $("blurOut").textContent = s.blur + " px";
 }
 
-// mod seçimi
-document.querySelectorAll("#seg button").forEach((b) =>
-  b.addEventListener("click", () => {
-    state.mode = b.dataset.mode;
-    chrome.storage.local.set({ mode: state.mode });
-    render();
-  })
-);
-
 // efektler
 function saveSettings() {
   chrome.storage.local.set({ settings: state.settings });
@@ -74,11 +78,11 @@ $("reset").onclick = () => { state.settings = { ...DEFAULTS }; saveSettings(); }
 $("file").onchange = async (e) => {
   const f = e.target.files[0];
   if (!f) return;
-  $("empty").hidden = false;
-  $("empty").textContent = "Yükleniyor...";
+  const label = $("addLabel");
+  label.textContent = "Yükleniyor...";
   await Lib.add(f, f.name);
   e.target.value = "";
-  $("empty").textContent = "Henüz video yok. Bir dosya ekle ya da kamera kaydı al.";
+  label.textContent = "＋ Ekle";
   load();
 };
 
