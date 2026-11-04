@@ -4,50 +4,50 @@
 <link rel="stylesheet" href="popup.css">
 <header>
   <img src="icons/icon48.png" width="28" height="28" alt="">
-  <h1>Sanal Kamera</h1>
-  <span id="status" class="status"><i></i><span id="statusText">Kamera</span></span>
+  <h1 data-i18n="extName">Virtual Camera</h1>
+  <span id="status" class="status"><i></i><span id="statusText"></span></span>
 </header>
 
 <section>
-  <div class="row"><h2>Toplantı kaydı</h2></div>
+  <div class="row"><h2 data-i18n="meetingRec"></h2></div>
   <div class="recrow">
-    <button class="btn rec" data-rec="screen">🖥 Ekran + ses</button>
-    <button class="btn rec" data-rec="audio">🎙 Sadece ses</button>
+    <button class="btn rec" data-rec="screen" data-i18n="screenAudio"></button>
+    <button class="btn rec" data-rec="audio" data-i18n="audioOnly"></button>
   </div>
 </section>
 
 <section>
-  <div class="row"><h2>Kaynak</h2></div>
+  <div class="row"><h2 data-i18n="source"></h2></div>
   <ul id="list"></ul>
   <div class="recrow addrow">
-    <button class="btn rec" data-rec="camera">⏺ Kamera</button>
-    <label class="btn" for="file" id="addLabel">＋ Ekle</label>
+    <button class="btn rec" data-rec="camera" data-i18n="recCamera"></button>
+    <label class="btn" for="file" id="addLabel" data-i18n="add"></label>
     <input type="file" id="file" accept="video/*" hidden>
   </div>
 </section>
 
 <section>
-  <div class="row"><h2>Efektler</h2><button id="reset" class="btn small ghost">Sıfırla</button></div>
+  <div class="row"><h2 data-i18n="effects"></h2><button id="reset" class="btn small ghost" data-i18n="reset"></button></div>
   <label class="fx">
-    <span>Ayna (sağ-sol çevir)</span>
+    <span data-i18n="mirror"></span>
     <input type="checkbox" id="mirror" class="switch">
   </label>
   <label class="fx">
-    <span>Parlaklık</span>
+    <span data-i18n="brightness"></span>
     <input type="range" id="brightness" min="0.5" max="1.5" step="0.05">
     <output id="brightnessOut"></output>
   </label>
   <label class="fx">
-    <span>Bulanıklık</span>
+    <span data-i18n="blur"></span>
     <input type="range" id="blur" min="0" max="10" step="0.5">
     <output id="blurOut"></output>
   </label>
-  <p class="muted tiny">Efektler video kaynağına uygulanır.</p>
+  <p class="muted tiny" data-i18n="fxNote"></p>
 </section>
 
 <footer>
-  <span><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> Kamera/Video geçişi</span>
-  <a href="#" id="shortcuts">değiştir</a>
+  <span><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> <span data-i18n="toggleShortcut"></span></span>
+  <a href="#" id="shortcuts" data-i18n="change"></a>
 </footer>
 
 <script src="lib.js"></script>

@@ -1,6 +1,17 @@
 // Video kütüphanesi (popup + kayıt sayfası ortak)
 // storage: library = [{id,name,size,type,created}], activeId, mode, settings, "vid:<id>" = dataURL
+// çeviri: Chrome arayüz dili tr ise _locales/tr, değilse _locales/en (default_locale)
+const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String)) || key;
+
 const Lib = {
+  // data-i18n (metin), data-i18n-ph (placeholder), data-i18n-title (title) attribute'larını doldurur
+  localize(root = document) {
+    document.documentElement.lang = chrome.i18n.getUILanguage();
+    root.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
+    root.querySelectorAll("[data-i18n-ph]").forEach((el) => (el.placeholder = t(el.dataset.i18nPh)));
+    root.querySelectorAll("[data-i18n-title]").forEach((el) => (el.title = t(el.dataset.i18nTitle)));
+  },
+
   async list() {
     const { library = [] } = await chrome.storage.local.get("library");
     return library;

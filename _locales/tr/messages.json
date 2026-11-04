@@ -1,0 +1,200 @@
+{
+  "extName": {
+    "message": "Sanal Kamera"
+  },
+  "extDesc": {
+    "message": "Google Meet ve Microsoft Teams için sanal kamera: videoyu kamera olarak oynat ya da kamerayı efektlerle kullan. Klip kaydet."
+  },
+  "cmdToggle": {
+    "message": "Kamera / Video arasında geçiş yap"
+  },
+  "statusCamera": {
+    "message": "Kamera"
+  },
+  "statusVideo": {
+    "message": "Video oynuyor"
+  },
+  "meetingRec": {
+    "message": "Toplantı kaydı"
+  },
+  "screenAudio": {
+    "message": "🖥 Ekran + ses"
+  },
+  "audioOnly": {
+    "message": "🎙 Sadece ses"
+  },
+  "source": {
+    "message": "Kaynak"
+  },
+  "recCamera": {
+    "message": "⏺ Kamera"
+  },
+  "add": {
+    "message": "＋ Ekle"
+  },
+  "loading": {
+    "message": "Yükleniyor..."
+  },
+  "effects": {
+    "message": "Efektler"
+  },
+  "reset": {
+    "message": "Sıfırla"
+  },
+  "mirror": {
+    "message": "Ayna (sağ-sol çevir)"
+  },
+  "brightness": {
+    "message": "Parlaklık"
+  },
+  "blur": {
+    "message": "Bulanıklık"
+  },
+  "fxNote": {
+    "message": "Efektler video kaynağına uygulanır."
+  },
+  "toggleShortcut": {
+    "message": "Kamera/Video geçişi"
+  },
+  "change": {
+    "message": "değiştir"
+  },
+  "realCamera": {
+    "message": "Bilgisayar kamerası"
+  },
+  "realCameraMeta": {
+    "message": "Varsayılan · gerçek kamera"
+  },
+  "download": {
+    "message": "İndir"
+  },
+  "delete": {
+    "message": "Sil"
+  },
+  "confirmDelete": {
+    "message": "\"$P1$\" silinsin mi?",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "recTitle": {
+    "message": "Kayıt"
+  },
+  "tabCamera": {
+    "message": "📷 Kamera"
+  },
+  "namePh": {
+    "message": "Kayıt adı (boş bırakırsan tarih/saat)"
+  },
+  "startRec": {
+    "message": "⏺ Kaydı başlat"
+  },
+  "pickAndRec": {
+    "message": "⏺ Paylaşımı seç ve kaydet"
+  },
+  "stopSave": {
+    "message": "⏹ Durdur ve kaydet"
+  },
+  "close": {
+    "message": "✕ Kapat"
+  },
+  "dlBtn": {
+    "message": "⬇ İndir"
+  },
+  "newRec": {
+    "message": "⏺ Yeni kayıt"
+  },
+  "done": {
+    "message": "✓ Kapat"
+  },
+  "hintScreen": {
+    "message": "Başlatınca Chrome'un paylaşım penceresi açılır: <b>Chrome Sekmesi</b> → toplantı sekmesini seç → <b>“Sekme sesini de paylaş”</b> kutusunu işaretle. Mikrofonun da kayda karıştırılır. Katılımcılara kaydı haber vermeyi unutma."
+  },
+  "hintAudio": {
+    "message": "Ekran + ses ile aynı: toplantı sekmesini seç ve <b>“Sekme sesini de paylaş”</b>'ı işaretle. Sadece ses (sekme + mikrofon) kaydedilir, görüntü kaydedilmez. Katılımcılara kaydı haber vermeyi unutma."
+  },
+  "phScreen": {
+    "message": "Başlatınca paylaşılacak sekme burada görünür."
+  },
+  "phAudio": {
+    "message": "Sadece ses kaydedilecek."
+  },
+  "ready": {
+    "message": "Hazır."
+  },
+  "readyCam": {
+    "message": "Hazır. İstersen kayda bir ad ver, sonra başlat."
+  },
+  "camError": {
+    "message": "Kamera açılamadı ($P1$). Adres çubuğundaki kamera ikonundan izin ver ya da sistem ayarlarında (Gizlilik → Kamera) Chrome'u aç.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "warnNoTabAudio": {
+    "message": "sekme sesi paylaşılmadı, diğer katılımcılar kayda girmez"
+  },
+  "warnNoMic": {
+    "message": "mikrofon izni yok, senin sesin kayda girmez"
+  },
+  "shareCancelled": {
+    "message": "Paylaşım iptal edildi."
+  },
+  "startFailed": {
+    "message": "Başlatılamadı: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "getReady": {
+    "message": "Hazırlan..."
+  },
+  "recordingWarn": {
+    "message": "Kayıt alınıyor. Uyarı: $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "recording": {
+    "message": "Kayıt alınıyor..."
+  },
+  "saving": {
+    "message": "Kaydediliyor..."
+  },
+  "labelRec": {
+    "message": "Kayıt"
+  },
+  "labelMeeting": {
+    "message": "Toplantı"
+  },
+  "labelAudio": {
+    "message": "Ses"
+  },
+  "savedLib": {
+    "message": "✓ \"$P1$\" kütüphaneye kaydedildi. Kullanmak için eklenti menüsünden seç.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "savedDl": {
+    "message": "✓ \"$P1$\" İndirilenler klasörüne indirildi ($P2$).",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  }
+}

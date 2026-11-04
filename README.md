@@ -2,7 +2,7 @@
 
 A Chrome extension that works as a virtual camera in **Google Meet** and **Microsoft Teams** (web). Play a video in place of your webcam, or use your real camera with effects, and switch between them live during a call.
 
-> The extension UI is currently in Turkish.
+> The UI is available in English and Turkish, following Chrome's language.
 
 ## Features
 
@@ -10,7 +10,11 @@ A Chrome extension that works as a virtual camera in **Google Meet** and **Micro
 - **Real camera:** use your webcam through the extension, with mirror, brightness and blur effects
 - **Live switching:** change the source from the popup or with `Alt+Shift+V` without rejoining the call
 - **Recording:** record a clip with your camera and use it as your virtual camera later; record screen + audio or audio only
-- **Works in Meet and Teams:** shows up as a "Sanal Kamera" device in the camera list
+- **Works in Meet and Teams:** shows up as a "Virtual Camera" device in the camera list
+
+## Supported sites
+
+Google Meet (`meet.google.com`) and Microsoft Teams web (`teams.microsoft.com`, `teams.live.com`, `teams.cloud.microsoft`).
 
 ## Installation
 
@@ -20,11 +24,13 @@ A Chrome extension that works as a virtual camera in **Google Meet** and **Micro
 4. Click **Load unpacked** and select the project folder
 5. Reload any open Meet / Teams tabs
 
+To build the Chrome Web Store package: `./scripts/package.sh` (outputs `dist/virtual-camera-<version>.zip`).
+
 ## Usage
 
 1. Click the extension icon to open the popup
 2. Add a video (or record one) and select it, or pick the camera
-3. In Meet / Teams, choose **Sanal Kamera** (or your regular camera) in the video settings
+3. In Meet / Teams, choose **Virtual Camera** (or your regular camera) in the video settings
 
 The source can be changed at any time during a call. Switching back to the real camera is one click away.
 
@@ -37,6 +43,12 @@ For debugging, run `localStorage.vcamDebug = "1"` in the page console and reload
 ## Contributing
 
 PRs are welcome :D Bug reports and ideas are welcome too. Just open an issue.
+
+Translations live in `_locales/<lang>/messages.json`. Adding a new language is just one new file.
+
+## Privacy
+
+Everything runs locally; nothing is collected or sent anywhere. See [PRIVACY.md](PRIVACY.md).
 
 ## License
 

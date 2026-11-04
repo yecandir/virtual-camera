@@ -11,8 +11,8 @@ const AUDIO_MIMES = ["audio/mp4;codecs=mp4a.40.2", "audio/mp4", "audio/webm;code
 
 const HINTS = {
   camera: "",
-  screen: "Başlatınca Chrome'un paylaşım penceresi açılır: <b>Chrome Sekmesi</b> → Meet sekmesini seç → <b>“Sekme sesini de paylaş”</b> kutusunu işaretle. Mikrofonun da kayda karıştırılır. Katılımcılara kaydı haber vermeyi unutma.",
-  audio: "Ekran + ses ile aynı: Meet sekmesini seç ve <b>“Sekme sesini de paylaş”</b>'ı işaretle. Sadece ses (sekme + mikrofon) kaydedilir, görüntü kaydedilmez. Katılımcılara kaydı haber vermeyi unutma.",
+  screen: t("hintScreen"),
+  audio: t("hintAudio"),
 };
 
 function say(text, cls = "") { msg.textContent = text; msg.className = "msg " + cls; }
@@ -36,11 +36,11 @@ function setSource(next) {
   h.innerHTML = HINTS[src];
   $("placeholder").hidden = src === "camera";
   $("placeholder").textContent =
-    src === "screen" ? "Başlatınca paylaşılacak sekme burada görünür." : "Sadece ses kaydedilecek.";
+    t(src === "screen" ? "phScreen" : "phAudio");
   $("rec").disabled = false;
-  $("rec").textContent = src === "camera" ? "⏺ Kaydı başlat" : "⏺ Paylaşımı seç ve kaydet";
+  $("rec").textContent = t(src === "camera" ? "startRec" : "pickAndRec");
   if (src === "camera") initCamera();
-  else say("Hazır.");
+  else say(t("ready"));
 }
 
 function initCamera() {
@@ -48,11 +48,11 @@ function initCamera() {
     .then((s) => {
       if (src !== "camera") return s.getTracks().forEach((t) => t.stop());
       camStream = s; v.srcObject = s;
-      say("Hazır. İstersen kayda bir ad ver, sonra başlat.");
+      say(t("readyCam"));
     })
     .catch((e) => {
       $("rec").disabled = true;
-      say(`Kamera açılamadı (${e.name}). Adres çubuğundaki kamera ikonundan izin ver ya da macOS Sistem Ayarları → Gizlilik → Kamera'da Chrome'u aç.`, "err");
+      say(t("camError", e.name), "err");
     });
 }
 
@@ -90,8 +90,8 @@ async function captureMeeting() {
   if (src === "screen") v.srcObject = new MediaStream([vt]);
 
   const warn = [];
-  if (!tabAudio.length) warn.push("sekme sesi paylaşılmadı, diğer katılımcılar kayda girmez");
-  if (!micStream) warn.push("mikrofon izni yok, senin sesin kayda girmez");
+  if (!tabAudio.length) warn.push(t("warnNoTabAudio"));
+  if (!micStream) warn.push(t("warnNoMic"));
   return { stream: new MediaStream(tracks), warn };
 }
 
@@ -108,13 +108,13 @@ $("rec").onclick = async () => {
       stopAll();
       $("rec").hidden = false; $("name").disabled = false;
       $("tabs").querySelectorAll("button").forEach((b) => (b.disabled = false));
-      say(e.name === "NotAllowedError" ? "Paylaşım iptal edildi." : "Başlatılamadı: " + e.message, "err");
+      say(e.name === "NotAllowedError" ? t("shareCancelled") : t("startFailed", e.message), "err");
       return;
     }
     $("placeholder").hidden = src === "screen";
   }
 
-  say("Hazırlan...");
+  say(t("getReady"));
   await countdown();
   if (cancelled) return;
 
@@ -132,7 +132,7 @@ $("rec").onclick = async () => {
   t0 = Date.now();
   $("timer").hidden = false;
   $("stop").hidden = false;
-  say(warn.length ? "Kayıt alınıyor. Uyarı: " + warn.join("; ") + "." : "Kayıt alınıyor...", warn.length ? "err" : "");
+  say(warn.length ? t("recordingWarn", warn.join("; ")) : t("recording"), warn.length ? "err" : "");
   ticker = setInterval(() => {
     const s = Math.floor((Date.now() - t0) / 1000);
     $("time").textContent = String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
@@ -159,12 +159,12 @@ async function save() {
   stopAll();
   $("timer").hidden = true;
   $("controls").hidden = true;
-  say("Kaydediliyor...");
+  say(t("saving"));
 
   const kind = src === "audio" ? "audio" : "video";
   const blob = new Blob(chunks, { type: kind + "/" + (ext === "m4a" ? "mp4" : ext) });
-  const stamp = new Date().toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" });
-  const label = src === "camera" ? "Kayıt" : src === "screen" ? "Toplantı" : "Ses";
+  const stamp = new Date().toLocaleString(chrome.i18n.getUILanguage(), { dateStyle: "short", timeStyle: "short" });
+  const label = t(src === "camera" ? "labelRec" : src === "screen" ? "labelMeeting" : "labelAudio");
   savedName = ($("name").value.trim() || label + " " + stamp) + "." + ext;
   savedBlob = blob;
 
@@ -177,10 +177,10 @@ async function save() {
   if (src === "camera") {
     // otomatik seçme: kullanıcı popup'taki listeden kendisi seçsin
     await Lib.add(blob, savedName, { activate: false });
-    say(`✓ "${savedName}" kütüphaneye kaydedildi. Kullanmak için eklenti menüsünden seç.`, "ok");
+    say(t("savedLib", savedName), "ok");
   } else {
     downloadBlob(blob, savedName);
-    say(`✓ "${savedName}" İndirilenler klasörüne indirildi (${Lib.size(blob.size)}).`, "ok");
+    say(t("savedDl", savedName, Lib.size(blob.size)), "ok");
   }
 }
 
@@ -197,5 +197,6 @@ $("close2").onclick = closeTab;
 $("again").onclick = () => location.reload();
 $("dl").onclick = () => savedBlob && downloadBlob(savedBlob, savedName);
 
+Lib.localize();
 const initial = new URLSearchParams(location.search).get("src");
 setSource(["camera", "screen", "audio"].includes(initial) ? initial : "camera");

@@ -20,7 +20,7 @@ const playing = () => state.mode === "video" && state.library.some((v) => v.id =
 function render() {
   const onVideo = playing();
   $("status").classList.toggle("video", onVideo);
-  $("statusText").textContent = onVideo ? "Video oynuyor" : "Kamera";
+  $("statusText").textContent = t(onVideo ? "statusVideo" : "statusCamera");
 
   const ul = $("list");
   ul.textContent = "";
@@ -28,7 +28,7 @@ function render() {
   // varsayılan kaynak: kamera
   const cam = document.createElement("li");
   cam.className = "cam" + (onVideo ? "" : " active");
-  cam.innerHTML = `<span class="dot"></span><span class="ico">📷</span><div class="info"><div class="name">MacBook kamerası</div><div class="meta">Varsayılan · gerçek kamera</div></div>`;
+  cam.innerHTML = `<span class="dot"></span><span class="ico">📷</span><div class="info"><div class="name">${t("realCamera")}</div><div class="meta">${t("realCameraMeta")}</div></div>`;
   cam.onclick = () => chrome.storage.local.set({ mode: "camera", activeId: null }).then(load);
   ul.append(cam);
 
@@ -37,9 +37,9 @@ function render() {
     const selected = onVideo && v.id === state.activeId;
     li.className = selected ? "active" : "";
     li.innerHTML = `<span class="dot"></span><span class="ico">🎞</span><div class="info"><div class="name"></div><div class="meta"></div></div>
-      <button class="dl" title="İndir">⬇</button><button class="del" title="Sil">✕</button>`;
+      <button class="dl" title="${t("download")}">⬇</button><button class="del" title="${t("delete")}">✕</button>`;
     li.querySelector(".name").textContent = v.name;
-    li.querySelector(".meta").textContent = Lib.size(v.size) + " · " + new Date(v.created).toLocaleDateString("tr-TR");
+    li.querySelector(".meta").textContent = Lib.size(v.size) + " · " + new Date(v.created).toLocaleDateString(chrome.i18n.getUILanguage());
     // seçili videoya tekrar tıklayınca seçim kalkar -> kamera
     li.onclick = () =>
       chrome.storage.local
@@ -48,7 +48,7 @@ function render() {
     li.querySelector(".dl").onclick = (e) => { e.stopPropagation(); Lib.download(v); };
     li.querySelector(".del").onclick = async (e) => {
       e.stopPropagation();
-      if (!confirm(`"${v.name}" silinsin mi?`)) return;
+      if (!confirm(t("confirmDelete", v.name))) return;
       await Lib.remove(v.id);
       load();
     };
@@ -79,10 +79,10 @@ $("file").onchange = async (e) => {
   const f = e.target.files[0];
   if (!f) return;
   const label = $("addLabel");
-  label.textContent = "Yükleniyor...";
+  label.textContent = t("loading");
   await Lib.add(f, f.name);
   e.target.value = "";
-  label.textContent = "＋ Ekle";
+  label.textContent = t("add");
   load();
 };
 
@@ -99,4 +99,5 @@ $("shortcuts").onclick = (e) => {
   chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
 };
 
+Lib.localize();
 load();

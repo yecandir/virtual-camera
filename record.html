@@ -1,18 +1,18 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Kayıt</title>
+<title data-i18n="recTitle">Recording</title>
 <link rel="stylesheet" href="ui.css">
 <link rel="stylesheet" href="record.css">
 <main>
   <header>
     <img src="icons/icon48.png" width="32" height="32" alt="">
-    <h1>Kayıt</h1>
+    <h1 data-i18n="recTitle"></h1>
   </header>
 
   <div class="tabs" id="tabs">
-    <button data-src="camera" class="on">📷 Kamera</button>
-    <button data-src="screen">🖥 Ekran + ses</button>
-    <button data-src="audio">🎙 Sadece ses</button>
+    <button data-src="camera" class="on" data-i18n="tabCamera"></button>
+    <button data-src="screen" data-i18n="screenAudio"></button>
+    <button data-src="audio" data-i18n="audioOnly"></button>
   </div>
 
   <div class="stage">
@@ -26,19 +26,19 @@
   <div id="hint" class="hint" hidden></div>
 
   <div id="controls">
-    <input id="name" type="text" placeholder="Kayıt adı (boş bırakırsan tarih/saat)" maxlength="60">
+    <input id="name" type="text" data-i18n-ph="namePh" maxlength="60">
     <div class="btns">
-      <button id="rec" class="btn primary big">⏺ Kaydı başlat</button>
-      <button id="stop" class="btn big" hidden>⏹ Durdur ve kaydet</button>
-      <button id="close" class="btn ghost big">✕ Kapat</button>
+      <button id="rec" class="btn primary big" data-i18n="startRec"></button>
+      <button id="stop" class="btn big" hidden data-i18n="stopSave"></button>
+      <button id="close" class="btn ghost big" data-i18n="close"></button>
     </div>
   </div>
 
   <div id="done" hidden>
     <div class="btns">
-      <button id="dl" class="btn big">⬇ İndir</button>
-      <button id="again" class="btn big">⏺ Yeni kayıt</button>
-      <button id="close2" class="btn primary big">✓ Kapat</button>
+      <button id="dl" class="btn big" data-i18n="dlBtn"></button>
+      <button id="again" class="btn big" data-i18n="newRec"></button>
+      <button id="close2" class="btn primary big" data-i18n="done"></button>
     </div>
   </div>
 </main>

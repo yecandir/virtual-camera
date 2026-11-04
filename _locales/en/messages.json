@@ -1,0 +1,200 @@
+{
+  "extName": {
+    "message": "Virtual Camera"
+  },
+  "extDesc": {
+    "message": "Virtual camera for Google Meet and Microsoft Teams: play a video as your webcam or use your camera with effects. Record clips."
+  },
+  "cmdToggle": {
+    "message": "Switch between camera / video"
+  },
+  "statusCamera": {
+    "message": "Camera"
+  },
+  "statusVideo": {
+    "message": "Video playing"
+  },
+  "meetingRec": {
+    "message": "Meeting recording"
+  },
+  "screenAudio": {
+    "message": "🖥 Screen + audio"
+  },
+  "audioOnly": {
+    "message": "🎙 Audio only"
+  },
+  "source": {
+    "message": "Source"
+  },
+  "recCamera": {
+    "message": "⏺ Camera"
+  },
+  "add": {
+    "message": "＋ Add"
+  },
+  "loading": {
+    "message": "Loading..."
+  },
+  "effects": {
+    "message": "Effects"
+  },
+  "reset": {
+    "message": "Reset"
+  },
+  "mirror": {
+    "message": "Mirror (flip horizontally)"
+  },
+  "brightness": {
+    "message": "Brightness"
+  },
+  "blur": {
+    "message": "Blur"
+  },
+  "fxNote": {
+    "message": "Effects are applied to the video source."
+  },
+  "toggleShortcut": {
+    "message": "Camera/Video toggle"
+  },
+  "change": {
+    "message": "change"
+  },
+  "realCamera": {
+    "message": "Computer camera"
+  },
+  "realCameraMeta": {
+    "message": "Default · real camera"
+  },
+  "download": {
+    "message": "Download"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "confirmDelete": {
+    "message": "Delete \"$P1$\"?",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "recTitle": {
+    "message": "Recording"
+  },
+  "tabCamera": {
+    "message": "📷 Camera"
+  },
+  "namePh": {
+    "message": "Recording name (leave empty for date/time)"
+  },
+  "startRec": {
+    "message": "⏺ Start recording"
+  },
+  "pickAndRec": {
+    "message": "⏺ Choose what to share and record"
+  },
+  "stopSave": {
+    "message": "⏹ Stop and save"
+  },
+  "close": {
+    "message": "✕ Close"
+  },
+  "dlBtn": {
+    "message": "⬇ Download"
+  },
+  "newRec": {
+    "message": "⏺ New recording"
+  },
+  "done": {
+    "message": "✓ Close"
+  },
+  "hintScreen": {
+    "message": "When you start, Chrome's share dialog opens: <b>Chrome Tab</b> → pick the meeting tab → check <b>“Also share tab audio”</b>. Your microphone is mixed into the recording too. Don't forget to tell participants you're recording."
+  },
+  "hintAudio": {
+    "message": "Same as Screen + audio: pick the meeting tab and check <b>“Also share tab audio”</b>. Only audio (tab + microphone) is recorded, no video. Don't forget to tell participants you're recording."
+  },
+  "phScreen": {
+    "message": "The shared tab will appear here once you start."
+  },
+  "phAudio": {
+    "message": "Only audio will be recorded."
+  },
+  "ready": {
+    "message": "Ready."
+  },
+  "readyCam": {
+    "message": "Ready. Give the recording a name if you like, then start."
+  },
+  "camError": {
+    "message": "Couldn't open the camera ($P1$). Allow it from the camera icon in the address bar, or enable Chrome under your system's camera privacy settings.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "warnNoTabAudio": {
+    "message": "tab audio wasn't shared, other participants won't be in the recording"
+  },
+  "warnNoMic": {
+    "message": "no microphone permission, your voice won't be in the recording"
+  },
+  "shareCancelled": {
+    "message": "Sharing cancelled."
+  },
+  "startFailed": {
+    "message": "Couldn't start: $P1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "getReady": {
+    "message": "Get ready..."
+  },
+  "recordingWarn": {
+    "message": "Recording. Warning: $P1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "recording": {
+    "message": "Recording..."
+  },
+  "saving": {
+    "message": "Saving..."
+  },
+  "labelRec": {
+    "message": "Recording"
+  },
+  "labelMeeting": {
+    "message": "Meeting"
+  },
+  "labelAudio": {
+    "message": "Audio"
+  },
+  "savedLib": {
+    "message": "✓ \"$P1$\" saved to the library. Select it from the extension menu to use it.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "savedDl": {
+    "message": "✓ \"$P1$\" downloaded to your Downloads folder ($P2$).",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  }
+}

@@ -50,7 +50,12 @@
   const origEnum = MDP.enumerateDevices;
   const orig = (c) => origGUM.call(md, c);
   const VID = "sanal-kamera-virtual";
-  const VLABEL = "Sanal Kamera";
+  // MAIN world'de chrome.i18n yok; Chrome'da navigator.language arayüz dilidir
+  const TR = /^tr\b/i.test(navigator.language || "");
+  const TXT = TR
+    ? { label: "Sanal Kamera", noVideo: "Video seçilmedi", playErr: "Video oynatılamadı (codec desteklenmiyor olabilir)" }
+    : { label: "Virtual Camera", noVideo: "No video selected", playErr: "Video can't be played (codec may be unsupported)" };
+  const VLABEL = TXT.label;
   let camDeviceId = null; // sayfa gerçek bir kamera seçtiyse onu kullan
   let cfg = { mode: "camera", blob: null, s: { mirror: false, brightness: 1, blur: 0 } };
   let cfgSeen = false;
@@ -76,7 +81,7 @@
   function videoState() {
     if (cfg.blob && (!fileVid || !fileVid.isConnected)) fileVid = document.getElementById("__vcam_video") || fileVid;
     if (fileVid && fileVid.error && fileVid.error.code !== 1)
-      fileErr = "Video oynatılamadı (codec desteklenmiyor olabilir)";
+      fileErr = TXT.playErr;
     else fileErr = null;
     if (fileVid && fileVid.paused && !fileVid.error) fileVid.play().catch(() => {});
   }
@@ -161,7 +166,7 @@
       g.fillStyle = "#fff";
       g.font = `${c.height / 12}px sans-serif`;
       g.textAlign = "center";
-      g.fillText("Video seçilmedi", c.width / 2, c.height / 2);
+      g.fillText(TXT.noVideo, c.width / 2, c.height / 2);
       g.fillText(new Date().toLocaleTimeString(), c.width / 2, c.height / 2 + c.height / 8);
     } else {
       g.fillStyle = "#000";
