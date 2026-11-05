@@ -1,5 +1,8 @@
 # Virtual Camera
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/dbcjpbaaghjopnbeinpjdhangilehlce?label=Chrome%20Web%20Store)](https://chromewebstore.google.com/detail/virtual-camera/dbcjpbaaghjopnbeinpjdhangilehlce)
+[![Users](https://img.shields.io/chrome-web-store/users/dbcjpbaaghjopnbeinpjdhangilehlce)](https://chromewebstore.google.com/detail/virtual-camera/dbcjpbaaghjopnbeinpjdhangilehlce)
+
 A Chrome extension that works as a virtual camera in **Google Meet** and **Microsoft Teams** (web). Play a video in place of your webcam, or use your real camera with effects, and switch between them live during a call.
 
 > The UI is available in English and Turkish, following Chrome's language.
@@ -17,6 +20,10 @@ A Chrome extension that works as a virtual camera in **Google Meet** and **Micro
 Google Meet (`meet.google.com`) and Microsoft Teams web (`teams.microsoft.com`, `teams.live.com`, `teams.cloud.microsoft`).
 
 ## Installation
+
+**[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/virtual-camera/dbcjpbaaghjopnbeinpjdhangilehlce)**, then reload any open Meet / Teams tabs.
+
+### From source (development)
 
 1. Download the code: `git clone https://github.com/yecandir/virtual-camera.git` (or **Code → Download ZIP** and unzip it)
 2. Open `chrome://extensions` in Chrome
