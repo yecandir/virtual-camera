@@ -1,0 +1,51 @@
+name: VirtualCamera
+options:
+  bundleIdPrefix: com.yecandir
+  developmentLanguage: en
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    DEVELOPMENT_TEAM: HDY4N85VD9
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0.0"
+    ENABLE_HARDENED_RUNTIME: YES
+targets:
+  VirtualCamera:
+    type: application
+    platform: macOS
+    sources: [App]
+    dependencies:
+      - target: CameraExtension
+        embed: true
+        codeSign: true
+        copy:
+          destination: wrapper
+          subpath: Contents/Library/SystemExtensions
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yecandir.virtualcamera
+        # App build number; bump freely.
+        CURRENT_PROJECT_VERSION: "8"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        PRODUCT_NAME: Virtual Camera
+        INFOPLIST_FILE: App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/App.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+  CameraExtension:
+    type: system-extension
+    platform: macOS
+    sources: [Extension]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yecandir.virtualcamera.extension
+        # Bump ONLY when Extension/ changes: a new number makes macOS replace the running
+        # extension (every app's camera feed restarts).
+        CURRENT_PROJECT_VERSION: "8"
+        PRODUCT_NAME: com.yecandir.virtualcamera.extension
+        INFOPLIST_FILE: Extension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Extension/Extension.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES

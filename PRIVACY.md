@@ -1,6 +1,6 @@
 # Privacy Policy: Virtual Camera
 
-_Last updated: November 4, 2026_
+_Last updated: November 6, 2026_
 
 Virtual Camera is a Chrome extension that replaces your webcam feed in Google Meet and Microsoft Teams with a video you choose, or passes through your real camera with optional effects.
 
@@ -10,6 +10,14 @@ Virtual Camera is a Chrome extension that replaces your webcam feed in Google Me
 - **Videos and recordings:** Videos you add and clips you record are stored **locally** in the extension's storage (`chrome.storage.local`) on your device. They never leave your computer unless you download them yourself.
 - **Screen and audio recordings:** Screen + audio and audio-only recordings are saved straight to your Downloads folder. They are not uploaded anywhere.
 - **Settings:** Your source and effect settings (mirror, brightness, blur) are stored locally.
+
+## macOS app
+
+The macOS app works the same way and keeps everything on your Mac:
+
+- **Camera, microphone, screen:** used only to produce the virtual camera image and the recordings you start. Nothing is sent anywhere.
+- **Videos and camera clips** are stored in `~/Library/Application Support/Virtual Camera`. Screen and audio recordings are saved to your Downloads folder.
+- It has no servers, analytics, tracking or advertising. Uninstalling the camera extension (from the app) and deleting the app and that folder removes everything.
 
 ## What the extension does not do
 

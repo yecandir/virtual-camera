@@ -1,0 +1,4 @@
+build/
+build.log
+# Generated from project.yml by XcodeGen
+VirtualCamera.xcodeproj/

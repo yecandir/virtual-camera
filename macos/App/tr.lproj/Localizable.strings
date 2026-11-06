@@ -1,0 +1,86 @@
+/* Main window */
+"Virtual Camera" = "Sanal Kamera";
+"Video playing" = "Video oynuyor";
+"Camera" = "Kamera";
+"Meeting recording" = "Toplantı kaydı";
+"🖥 Screen + audio" = "🖥 Ekran + ses";
+"🎙 Audio only" = "🎙 Sadece ses";
+"Source" = "Kaynak";
+"⏺ Camera" = "⏺ Kamera";
+"＋ Add" = "＋ Ekle";
+"Loading..." = "Yükleniyor...";
+"Effects" = "Efektler";
+"Reset" = "Sıfırla";
+"Mirror (flip left-right)" = "Ayna (sağ-sol çevir)";
+"Brightness" = "Parlaklık";
+"Blur" = "Bulanıklık";
+"Effects apply to the virtual camera image (camera and videos)." = "Efektler sanal kamera görüntüsüne uygulanır (kamera ve videolar).";
+"Camera/Video toggle" = "Kamera/Video geçişi";
+"Camera/Video toggle (⌥⇧V)" = "Kamera/Video geçişi (⌥⇧V)";
+"Camera extension" = "Kamera eklentisi";
+"Install / update" = "Kur / güncelle";
+"Uninstall" = "Kaldır";
+"Computer camera" = "Bilgisayar kamerası";
+"Default · real camera" = "Varsayılan · gerçek kamera";
+"Show in Finder" = "Finder'da göster";
+"Delete" = "Sil";
+"Cancel" = "Vazgeç";
+"Delete \"%@\"?" = "\"%@\" silinsin mi?";
+"Virtual camera not connected" = "Sanal kamera bağlı değil";
+"In use by an app" = "Bir uygulama kullanıyor";
+"Ready · pick “Virtual Camera (Mac)” in Slack, Zoom, Meet…" = "Hazır · Slack, Zoom, Meet… içinde “Virtual Camera (Mac)”i seç";
+"Camera access is off. Virtual Camera needs it to send video to its device." = "Kamera erişimi kapalı. Sanal Kamera, kendi cihazına görüntü gönderebilmek için buna ihtiyaç duyar.";
+"Open Settings" = "Ayarları aç";
+"OK" = "Tamam";
+
+/* Menu bar */
+"▶︎ Video playing" = "▶︎ Video oynuyor";
+"📷 Camera" = "📷 Kamera";
+"Record" = "Kayıt";
+"Open Virtual Camera…" = "Sanal Kamera'yı aç…";
+"Quit" = "Çık";
+
+/* Recording window */
+"Recording" = "Kayıt";
+"Meeting" = "Toplantı";
+"Audio" = "Ses";
+"Screen" = "Ekran";
+"Recording name (leave empty for date/time)" = "Kayıt adı (boş bırakırsan tarih/saat)";
+"⏺ Start recording" = "⏺ Kaydı başlat";
+"⏹ Stop and save" = "⏹ Durdur ve kaydet";
+"✕ Close" = "✕ Kapat";
+"✓ Close" = "✓ Kapat";
+"⏺ New recording" = "⏺ Yeni kayıt";
+"Opening camera…" = "Kamera açılıyor…";
+"The shared screen appears here once recording starts." = "Kayıt başlayınca paylaşılan ekran burada görünür.";
+"Only audio will be recorded." = "Sadece ses kaydedilecek.";
+"Records the selected screen and all computer sound, mixed with your microphone. Remember to tell participants you're recording." = "Seçili ekranı ve bilgisayarın tüm sesini kaydeder, mikrofonun da kayda girer. Katılımcılara kaydı haber vermeyi unutma.";
+"Records all computer sound and your microphone, no picture. Remember to tell participants you're recording." = "Bilgisayarın tüm sesini ve mikrofonunu kaydeder, görüntü kaydedilmez. Katılımcılara kaydı haber vermeyi unutma.";
+"Open Screen Recording settings" = "Ekran Kaydı ayarlarını aç";
+"Ready." = "Hazır.";
+"Ready. Name your recording if you like, then start." = "Hazır. İstersen kayda bir ad ver, sonra başlat.";
+"Get ready..." = "Hazırlan...";
+"Recording..." = "Kayıt alınıyor...";
+"Recording. Warning: %@." = "Kayıt alınıyor. Uyarı: %@.";
+"no microphone permission, your voice won't be recorded" = "mikrofon izni yok, senin sesin kayda girmez";
+"Saving..." = "Kaydediliyor...";
+"Nothing was recorded." = "Hiçbir şey kaydedilmedi.";
+"Couldn't start: %@" = "Başlatılamadı: %@";
+"No display found." = "Ekran bulunamadı.";
+"Display %lld" = "Ekran %lld";
+"Allow Screen Recording for Virtual Camera in System Settings, then reopen the app." = "Sistem Ayarları'nda Sanal Kamera için Ekran Kaydı'na izin ver, sonra uygulamayı yeniden aç.";
+"✓ \"%@\" saved to the library. Select it in the source list to use it." = "✓ \"%@\" kütüphaneye kaydedildi. Kullanmak için kaynak listesinden seç.";
+"✓ \"%@\" saved to Downloads (%@)." = "✓ \"%1$@\" İndirilenler klasörüne kaydedildi (%2$@).";
+
+/* Library */
+"WebM videos aren't supported on macOS. Use an MP4 or MOV file." = "WebM videolar macOS'ta desteklenmiyor. MP4 ya da MOV dosyası kullan.";
+"This video can't be played. Use an MP4 or MOV file." = "Bu video oynatılamıyor. MP4 ya da MOV dosyası kullan.";
+
+/* Camera extension */
+"Installing…" = "Kuruluyor…";
+"Removing…" = "Kaldırılıyor…";
+"Approve it in System Settings → General → Login Items & Extensions" = "Sistem Ayarları → Genel → Giriş Öğeleri ve Uzantılar'dan onayla";
+"Camera extension ready" = "Kamera eklentisi hazır";
+"Restart your Mac to finish" = "Bitirmek için Mac'i yeniden başlat";
+"Move the app to /Applications first" = "Önce uygulamayı /Applications klasörüne taşı";
+"Error: %@" = "Hata: %@";

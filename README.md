@@ -5,6 +5,8 @@
 
 A Chrome extension that works as a virtual camera in **Google Meet** and **Microsoft Teams** (web). Play a video in place of your webcam, or use your real camera with effects, and switch between them live during a call.
 
+> **New: macOS app.** A native Mac version adds a system-wide **Virtual Camera (Mac)** device that works in every app: Slack, Zoom, Teams, FaceTime, Meet in any browser. See [macOS app](#macos-app).
+
 > The UI is available in English and Turkish, following Chrome's language.
 
 ## Features
@@ -46,6 +48,33 @@ The source can be changed at any time during a call. Switching back to the real 
 The extension overrides `getUserMedia` / `enumerateDevices` on the page and returns a synthetic video track. Frames are drawn on a canvas and, where supported, written to a `MediaStreamTrackGenerator` as I420 (YUV) frames, which Teams' video pipeline requires. Video playback and the frame timer run in the extension's isolated world, so they aren't blocked by the site's CSP / Trusted Types.
 
 For debugging, run `localStorage.vcamDebug = "1"` in the page console and reload the page.
+
+## macOS app
+
+The `macos/` folder contains a native Mac app (macOS 14+) with the same features, available in **every** app that uses a camera, not just Meet/Teams in Chrome.
+
+- **System-wide camera:** adds a **Virtual Camera (Mac)** device through a CoreMediaIO camera extension; pick it in Slack, Zoom, Teams, FaceTime, Photo Booth or any browser
+- **Video or real camera:** play a looping video, or pass your real camera through with mirror, brightness and blur
+- **⌥⇧V** switches between camera and video from anywhere
+- **Recording:** camera clips go to the app's video library, while screen + audio and audio-only recordings go to Downloads (MP4 / M4A)
+- **Light-friendly:** the real camera only turns on while an app is actually using the virtual camera
+
+### Install
+
+1. Download `VirtualCamera-<version>.dmg` from [Releases](https://github.com/yecandir/virtual-camera/releases) and drag **Virtual Camera** into **Applications**
+2. Open it and approve the camera extension in **System Settings → General → Login Items & Extensions → Camera Extensions**
+3. In your meeting app, choose **Virtual Camera (Mac)** as the camera
+
+Videos must be MP4 or MOV (macOS can't play WebM).
+
+### Build from source
+
+Requires Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`). Set your own `DEVELOPMENT_TEAM` and bundle IDs in `macos/project.yml`.
+
+- `macos/install.sh` builds a development version and installs it to `/Applications` (system extensions only load from there)
+- `macos/release.sh` builds the notarized DMG (Developer ID, needs a `notarytool` keychain profile)
+
+How it works: the app renders frames (video or camera + effects) and pushes them into the extension's sink stream; the extension republishes them as a regular camera and reports how many apps are watching, so the pipeline idles when nobody is.
 
 ## Contributing
 

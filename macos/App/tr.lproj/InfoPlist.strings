@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "Sanal Kamera, kameranı sanal kameranın kaynağı olarak ve kayıtlarda kullanır.";
+"NSMicrophoneUsageDescription" = "Sanal Kamera, ekran ve ses kayıtlarında mikrofonunu kaydeder.";
+"NSSystemExtensionUsageDescription" = "Slack, Zoom ve FaceTime gibi uygulamaların kullanabilmesi için Sanal Kamera cihazını kurar.";
