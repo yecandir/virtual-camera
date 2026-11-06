@@ -30,10 +30,10 @@ Google Meet (`meet.google.com`) and Microsoft Teams web (`teams.microsoft.com`, 
 1. Download the code: `git clone https://github.com/yecandir/virtual-camera.git` (or **Code → Download ZIP** and unzip it)
 2. Open `chrome://extensions` in Chrome
 3. Turn on **Developer mode** (top right)
-4. Click **Load unpacked** and select the project folder
+4. Click **Load unpacked** and select the **`chrome-ext`** folder (if you loaded the repo root before this folder existed, remove it and load `chrome-ext` instead)
 5. Reload any open Meet / Teams tabs
 
-To build the Chrome Web Store package: `./scripts/package.sh` (outputs `dist/virtual-camera-<version>.zip`).
+To build the Chrome Web Store package: `./chrome-ext/scripts/package.sh` (outputs `dist/virtual-camera-<version>.zip`).
 
 ## Usage
 
@@ -76,11 +76,19 @@ Requires Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew inst
 
 How it works: the app renders frames (video or camera + effects) and pushes them into the extension's sink stream; the extension republishes them as a regular camera and reports how many apps are watching, so the pipeline idles when nobody is.
 
+## Repository layout
+
+| Folder | What |
+|---|---|
+| `chrome-ext/` | Chrome extension (Manifest V3), store assets, packaging script |
+| `macos/` | Native Mac app + CoreMediaIO camera extension |
+| `dist/` | Build outputs (not committed) |
+
 ## Contributing
 
 PRs are welcome :D Bug reports and ideas are welcome too. Just open an issue.
 
-Translations live in `_locales/<lang>/messages.json`. Adding a new language is just one new file.
+Translations live in `chrome-ext/_locales/<lang>/messages.json` (extension) and `macos/App/<lang>.lproj/Localizable.strings` (Mac app).
 
 ## Privacy
 
