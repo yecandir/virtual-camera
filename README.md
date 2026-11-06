@@ -62,7 +62,9 @@ The `macos/` folder contains a native Mac app (macOS 14+) with the same features
 ### Install
 
 1. Download `VirtualCamera-<version>.dmg` from [Releases](https://github.com/yecandir/virtual-camera/releases) and drag **Virtual Camera** into **Applications**
-2. Open it and approve the camera extension in **System Settings → General → Login Items & Extensions → Camera Extensions**
+2. Open it and approve the camera extension:
+   - macOS 15+: **System Settings → General → Login Items & Extensions → Camera Extensions**
+   - macOS 14: **System Settings → Privacy & Security**, scroll down to the "system software from Virtual Camera was blocked" notice and click **Allow**
 3. In your meeting app, choose **Virtual Camera (Mac)** as the camera
 
 Videos must be MP4 or MOV (macOS can't play WebM).

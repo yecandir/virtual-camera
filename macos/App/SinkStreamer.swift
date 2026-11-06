@@ -177,8 +177,20 @@ final class SinkStreamer {
             mScope: CMIOObjectPropertyScope(kCMIOObjectPropertyScopeGlobal),
             mElement: CMIOObjectPropertyElement(kCMIOObjectPropertyElementMain))
         let streams: [CMIOStreamID] = readArray(device, &addr)
-        // The extension adds the source stream first and the sink stream second.
-        return streams.count >= 2 ? streams[1] : nil
+        // Pick the sink by direction instead of trusting list order: the source stream
+        // (what apps read) reports 1, the sink (what we feed) reports 0.
+        let sink = streams.first { stream in
+            var dirAddr = CMIOObjectPropertyAddress(
+                mSelector: CMIOObjectPropertySelector(kCMIOStreamPropertyDirection),
+                mScope: CMIOObjectPropertyScope(kCMIOObjectPropertyScopeGlobal),
+                mElement: CMIOObjectPropertyElement(kCMIOObjectPropertyElementMain))
+            var direction: UInt32 = 1
+            var used: UInt32 = 0
+            let status = CMIOObjectGetPropertyData(stream, &dirAddr, 0, nil,
+                                                   UInt32(MemoryLayout<UInt32>.size), &used, &direction)
+            return status == noErr && direction == 0
+        }
+        return sink ?? (streams.count >= 2 ? streams[1] : nil)
     }
 
     private func readArray<T: FixedWidthInteger>(_ object: CMIOObjectID, _ addr: inout CMIOObjectPropertyAddress) -> [T] {

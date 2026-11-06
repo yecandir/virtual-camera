@@ -80,6 +80,7 @@
 "Installing…" = "Kuruluyor…";
 "Removing…" = "Kaldırılıyor…";
 "Approve it in System Settings → General → Login Items & Extensions" = "Sistem Ayarları → Genel → Giriş Öğeleri ve Uzantılar'dan onayla";
+"Click Allow in System Settings → Privacy & Security" = "Sistem Ayarları → Gizlilik ve Güvenlik'te İzin Ver'e tıkla";
 "Camera extension ready" = "Kamera eklentisi hazır";
 "Restart your Mac to finish" = "Bitirmek için Mac'i yeniden başlat";
 "Move the app to /Applications first" = "Önce uygulamayı /Applications klasörüne taşı";

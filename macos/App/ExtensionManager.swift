@@ -40,7 +40,13 @@ final class ExtensionManager: NSObject, OSSystemExtensionRequestDelegate {
 
     func requestNeedsUserApproval(_ request: OSSystemExtensionRequest) {
         changed = true
-        onStatus?(String(localized: "Approve it in System Settings → General → Login Items & Extensions"))
+        // macOS 15 moved extension approval to its own pane; macOS 14 shows an "Allow"
+        // button under Privacy & Security instead.
+        if #available(macOS 15, *) {
+            onStatus?(String(localized: "Approve it in System Settings → General → Login Items & Extensions"))
+        } else {
+            onStatus?(String(localized: "Click Allow in System Settings → Privacy & Security"))
+        }
     }
 
     func request(_ request: OSSystemExtensionRequest, didFinishWithResult result: OSSystemExtensionRequest.Result) {
